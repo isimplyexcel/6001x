@@ -174,8 +174,18 @@ def isValidWord(word, hand, wordList):
     wordList: list of lowercase strings
     """
     # TO DO ... <-- Remove this comment when you code this function
-
-
+    if len(word) == 0:
+        return False
+    elif word in wordList:
+        freq_letters_word = getFrequencyDict(word)
+        for (i, j) in freq_letters_word.items():
+            if hand.get(i) is None:
+                return False
+            elif j > hand.get(i):
+                return False
+        return True
+    else:
+        return False
 #
 # Problem #4: Playing a hand
 #
@@ -188,6 +198,7 @@ def calculateHandlen(hand):
     returns: integer
     """
     # TO DO... <-- Remove this comment when you code this function
+    return sum(hand.values())
 
 
 
@@ -215,22 +226,24 @@ def playHand(hand, wordList, n):
     """
     # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
+    score = 0
     
     # As long as there are still letters left in the hand:
-    
+    while n > 0:
         # Display the hand
-        
+        current_hand = " ".join(hand.items())
+        print("Current Hand: " + current_hand)
         # Ask user for input
-        
+        user_input = input("Enter word, or a \".\" to indicate that you are finished: ")
         # If the input is a single period:
-        
+            if user_input == ".":
             # End the game (break out of the loop)
-
+                break
             
         # Otherwise (the input is not a single period):
-        
+            else:
             # If the word is not valid:
-            
+
                 # Reject invalid word (print a message followed by a blank line)
 
             # Otherwise (the word is valid):
